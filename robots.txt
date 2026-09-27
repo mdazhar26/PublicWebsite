@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://get-set-go.in/sitemap.xml
