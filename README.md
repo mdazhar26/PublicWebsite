@@ -24,4 +24,4 @@ Replace conflicting web-hosting A/AAAA records for the apex. DNS propagation and
 
 ## Content
 
-Game information is based on the Arrow Quest 1.2.0 source. No unverified store availability, download links, ratings, reviews, or advertising claims are published. Support and privacy links follow the game's existing settings. Add verified store URLs when available. The trailer has native controls and does not autoplay. All assets are served locally; no analytics or external fonts are loaded.
+Game information is based on the Arrow Quest 1.2.0 source. No unverified store availability, download links, ratings, reviews, or advertising claims are published. The privacy policy is hosted locally at `privacy-policy.html`; support uses the game's existing email address. Add verified store URLs when available. The trailer has native controls and does not autoplay. All assets are served locally; no analytics or external fonts are loaded.
