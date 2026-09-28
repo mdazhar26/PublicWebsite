@@ -10,6 +10,12 @@
 .policy section p{color:#bfc8b9;line-height:1.85;overflow-wrap:anywhere}
 .policy section a{text-decoration:underline;text-underline-offset:4px;color:#c5fa76}
 .policy .button{margin-top:22px}
+.policy-toolbar{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.policy-toolbar .eyebrow{margin:0}
+.policy-language{display:flex;align-items:center;gap:10px;color:#bfc8b9;font-size:14px}
+.policy-language select{appearance:auto;background:#182019;color:#ecf0eb;border:1px solid #44513e;border-radius:999px;padding:9px 34px 9px 14px;font:inherit}
+.policy-language select:focus-visible{outline:2px solid #c5fa76;outline-offset:3px}
+[dir="rtl"] .policy{text-align:right}
 @media(max-width:680px){.policy{padding-block:45px 60px}.policy-intro{font-size:18px}.policy h2{font-size:24px}}
 
 /* Game progression and supported app languages */
