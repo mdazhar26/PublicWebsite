@@ -16,6 +16,17 @@
 .stats strong{font-size:clamp(24px,3.5vw,48px);overflow-wrap:break-word}
 .language-section{padding-block:0 70px}
 .language-section>p:not(.eyebrow){max-width:720px;color:#aeb8ad}
-.language-list{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:26px 0 0}
+.language-list{display:flex;flex-shrink:0;gap:10px;list-style:none;padding:0 10px 0 0;margin:0}
 .language-list li{padding:8px 16px;border:1px solid #44513e;border-radius:24px;color:#dce4d7;font-size:14px}
 @media(max-width:680px){.stats strong{font-size:24px}.language-section{padding-bottom:50px}}
+
+/* Continuous language ribbon, with accessible motion controls. */
+.language-marquee{overflow:hidden;margin-top:26px;mask-image:linear-gradient(to right,transparent,#000 3%,#000 97%,transparent)}
+.language-track{display:flex;width:max-content;animation:language-scroll 45s linear infinite}
+.language-list li{white-space:nowrap}
+.language-marquee:hover .language-track,.language-section.is-paused .language-track{animation-play-state:paused}
+.language-toggle{margin-top:16px;padding:8px 16px;border:1px solid #44513e;border-radius:24px;background:transparent;color:#dce4d7;font:inherit;font-size:13px;cursor:pointer}
+.language-toggle:hover{border-color:#c5fa76;color:#c5fa76}
+.language-toggle:focus-visible{outline:2px solid #c5fa76;outline-offset:4px}
+@keyframes language-scroll{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.language-track{animation:none;width:auto}.language-marquee{mask-image:none}.language-list{flex-wrap:wrap;flex-shrink:1;padding:0}.language-list[aria-hidden="true"],.language-toggle{display:none}}
