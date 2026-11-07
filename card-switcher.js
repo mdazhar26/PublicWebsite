@@ -38,7 +38,7 @@
     const name = card.name;
     switcher.querySelector('#switcher-name').textContent = name;
     switcher.querySelector('#switcher-description').textContent = card.description;
-    switcher.querySelector('#switcher-count').textContent = `${String(current + 1).padStart(2, '0')} / 07 · PUZZLE COLLECTION`;
+    switcher.querySelector('#switcher-count').textContent = `GAME ${String(current + 1).padStart(2, '0')} · PUZZLE COLLECTION`;
     const image = switcher.querySelector('#switcher-image');
     image.src = `assets/game-${current}.png`;
     image.alt = `${name} gameplay screenshot`;
