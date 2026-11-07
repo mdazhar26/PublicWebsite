@@ -1,14 +1,43 @@
 (() => {
-  const cards = [...document.querySelectorAll('.game-card')];
+  const cards = [
+  {
+    "name": "Arrow Quest",
+    "description": "Read the arrow directions and clear a path through interlocking puzzles."
+  },
+  {
+    "name": "Block Boom",
+    "description": "Place block pieces and complete lines to keep the board open."
+  },
+  {
+    "name": "Word Puzzle",
+    "description": "Find hidden words with progressive search difficulty across languages."
+  },
+  {
+    "name": "Sudoku",
+    "description": "Use logic to fill number grids, with local or Western digit options."
+  },
+  {
+    "name": "Color Sort",
+    "description": "Pour matching colors into tubes and plan the order of each move."
+  },
+  {
+    "name": "Block Shift",
+    "description": "Slide blocks horizontally and clear complete rows as new rows rise."
+  },
+  {
+    "name": "Tic Tac Toe",
+    "description": "Play against the computer, track round scores and try another strategy."
+  }
+];
   const switcher = document.querySelector('.card-switcher');
   const choices = switcher.querySelector('.switcher-choices');
   let current = 2;
   const show = (index) => {
     current = (index + cards.length) % cards.length;
     const card = cards[current];
-    const name = card.querySelector('h3').textContent;
+    const name = card.name;
     switcher.querySelector('#switcher-name').textContent = name;
-    switcher.querySelector('#switcher-description').textContent = card.querySelector('p').textContent;
+    switcher.querySelector('#switcher-description').textContent = card.description;
     switcher.querySelector('#switcher-count').textContent = `${String(current + 1).padStart(2, '0')} / 07 · PUZZLE COLLECTION`;
     const image = switcher.querySelector('#switcher-image');
     image.src = `assets/game-${current}.png`;
@@ -18,7 +47,7 @@
   cards.forEach((card, index) => {
     const button = document.createElement('button');
     button.type = 'button';
-    button.textContent = card.querySelector('h3').textContent;
+    button.textContent = card.name;
     button.addEventListener('click', () => show(index));
     choices.append(button);
   });
@@ -31,5 +60,4 @@
     }
   });
   show(current);
-  document.querySelector('.game-grid').hidden = true;
 })();
