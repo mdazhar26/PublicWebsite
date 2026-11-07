@@ -15,8 +15,47 @@
     const angle = i * Math.PI * (3 - Math.sqrt(5));
     return { label, x: radius * Math.cos(angle), y, z: radius * Math.sin(angle) };
   });
+  // Simplified continent silhouettes, projected onto the same rotating sphere.
+  const continents = [
+    [[-168,70],[-145,72],[-130,60],[-124,49],[-124,40],[-117,32],[-110,29],[-105,22],[-97,16],[-88,15],[-83,9],[-77,8],[-83,20],[-90,22],[-97,27],[-82,25],[-81,31],[-75,36],[-67,45],[-58,51],[-65,59],[-80,63],[-96,69],[-115,72],[-140,70]],
+    [[-73,60],[-48,60],[-21,71],[-28,81],[-48,84],[-61,77]],
+    [[-81,12],[-70,11],[-61,7],[-51,3],[-35,-6],[-39,-18],[-46,-24],[-52,-34],[-65,-55],[-72,-49],[-75,-34],[-80,-12]],
+    [[-17,36],[-5,36],[10,37],[25,32],[34,30],[43,12],[51,11],[43,-3],[40,-15],[32,-26],[18,-35],[12,-28],[10,-12],[0,5],[-12,5],[-17,16]],
+    [[-10,36],[-9,44],[-1,49],[8,54],[5,59],[18,71],[32,70],[40,60],[58,69],[90,76],[120,73],[150,61],[179,66],[170,53],[145,45],[133,35],[121,23],[110,20],[106,8],[100,3],[96,16],[88,22],[80,7],[72,20],[58,25],[47,30],[43,12],[35,30],[28,41],[18,40],[12,45],[3,43]],
+    [[112,-22],[119,-17],[130,-12],[137,-16],[145,-14],[153,-26],[150,-37],[138,-39],[130,-33],[115,-35]],
+    [[47,-13],[51,-16],[48,-25],[44,-24]],
+    [[130,32],[141,46],[145,43],[140,35]],
+    [[96,5],[106,-6],[116,-8],[113,-3],[104,1]],
+    [[166,-34],[178,-38],[173,-46],[166,-46]]
+  ];
+  const land = stage.querySelector('.globe-land');
+  const landPaths = continents.map(() => {
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    land.append(path);
+    return path;
+  });
+  function drawMap() {
+    continents.forEach((coast, index) => {
+      const points = coast.map(([lon, lat]) => {
+        const latitude = lat * Math.PI / 180;
+        const longitude = lon * Math.PI / 180 + angle - 0.3;
+        return { x: Math.cos(latitude) * Math.sin(longitude), y: -Math.sin(latitude), z: Math.cos(latitude) * Math.cos(longitude) };
+      });
+      const clipped = [];
+      points.forEach((b, i) => {
+        const a = points[(i + points.length - 1) % points.length];
+        if ((a.z >= 0) !== (b.z >= 0)) {
+          const t = a.z / (a.z - b.z);
+          clipped.push({x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t});
+        }
+        if (b.z >= 0) clipped.push(b);
+      });
+      landPaths[index].setAttribute('d', clipped.length < 3 ? '' : clipped.map((point, i) => `${i ? 'L' : 'M'}${(300 + point.x * 268).toFixed(1)},${(300 + point.y * 268).toFixed(1)}`).join(' ') + 'Z');
+    });
+  }
   let angle = 0, last = 0, frame = 0, paused = false, visible = false;
   function draw() {
+    drawMap();
     const cos = Math.cos(angle), sin = Math.sin(angle);
     points.forEach(({ label, x, y, z }) => {
       const px = x * cos + z * sin;
