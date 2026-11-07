@@ -47,7 +47,8 @@
   cards.forEach((card, index) => {
     const button = document.createElement('button');
     button.type = 'button';
-    button.textContent = card.name;
+    button.setAttribute('aria-label', `Show ${card.name}`);
+    button.title = card.name;
     button.addEventListener('click', () => show(index));
     choices.append(button);
   });
@@ -59,5 +60,37 @@
       show(current + (event.key === 'ArrowRight' ? 1 : -1));
     }
   });
+  // Trackpad: one change per horizontal gesture, including its momentum tail.
+  let wheelTotal = 0;
+  let wheelLocked = false;
+  let wheelReset;
+  switcher.addEventListener('wheel', (event) => {
+    if (event.ctrlKey || Math.abs(event.deltaX) <= Math.abs(event.deltaY)) return;
+    event.preventDefault();
+    clearTimeout(wheelReset);
+    wheelReset = setTimeout(() => { wheelTotal = 0; wheelLocked = false; }, 220);
+    if (wheelLocked) return;
+    wheelTotal += event.deltaX * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? switcher.clientWidth : 1);
+    if (Math.abs(wheelTotal) >= 50) {
+      show(current + (wheelTotal > 0 ? 1 : -1));
+      wheelLocked = true;
+    }
+  }, { passive: false });
+  // Allow vertical page scrolling while recognizing horizontal finger swipes.
+  let start;
+  switcher.addEventListener('pointerdown', (event) => {
+    if (event.pointerType === 'mouse' || !event.isPrimary) return;
+    start = { x: event.clientX, y: event.clientY, id: event.pointerId };
+  });
+  switcher.addEventListener('pointerup', (event) => {
+    if (!start || event.pointerId !== start.id) return;
+    const dx = event.clientX - start.x;
+    const dy = event.clientY - start.y;
+    start = undefined;
+    if (Math.abs(dx) >= 45 && Math.abs(dx) > Math.abs(dy) * 1.3) {
+      show(current + (dx < 0 ? 1 : -1));
+    }
+  });
+  switcher.addEventListener('pointercancel', () => { start = undefined; });
   show(current);
 })();
