@@ -1,6 +1,6 @@
 # Seekers Quest
 
-Official company website featuring Arrow Quest: Way Out. Dependency-free static HTML/CSS, with original game artwork and trailer. Target domain: https://get-set-go.in.
+Official company website featuring ArrowsBlock Blast!+. Dependency-free static HTML/CSS, with original game artwork and trailer. Target domain: https://get-set-go.in.
 
 ## Preview
 
@@ -24,4 +24,4 @@ Replace conflicting web-hosting A/AAAA records for the apex. DNS propagation and
 
 ## Content
 
-Game information is based on the Arrow Quest 1.2.0 source. No unverified store availability, download links, ratings, reviews, or advertising claims are published. The privacy policy is hosted locally at `privacy-policy.html`; support uses the game's existing email address. Add verified store URLs when available. The trailer has native controls and does not autoplay. All assets are served locally; no analytics or external fonts are loaded.
+Game information is based on the current ArrowsBlock Blast!+ source: seven games and 35 app language options. The home page includes collection artwork, a scalable language illustration, and an actual Sudoku screenshot. No unverified store availability, download links, ratings, reviews, or advertising claims are published. The privacy policy is hosted locally at `privacy-policy.html`; support uses the game's existing email address. Add verified store URLs when available. The legacy arrow-only trailer is not presented on the collection home page. All assets are served locally; no analytics or external fonts are loaded.
