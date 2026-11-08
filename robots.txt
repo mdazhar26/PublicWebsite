@@ -1,3 +1,6 @@
+User-agent: Google-adstxt
+Disallow:
+
 User-agent: *
 Allow: /
 Sitemap: https://get-set-go.in/sitemap.xml
